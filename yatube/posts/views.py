@@ -34,6 +34,7 @@ def group_posts(request, slug):
     template = 'posts/group_list.html'
     return render(request, template, context)
 
+
 def profile(request, username):
     # Здесь код запроса к модели и создание словаря контекста
     author = User.objects.get(username=username)
@@ -56,8 +57,8 @@ def post_detail(request, post_id):
     # Здесь код запроса к модели и создание словаря контекста
     post = get_object_or_404(Post, pk=post_id)
     posts_count = post.author.posts.count()
-    #user_post = User.objects.get(pk=post_id)
-    #print_post = Post.objects.filter(author__username = user_post)
+    # user_post = User.objects.get(pk=post_id)
+    # print_post = Post.objects.filter(author__username = user_post)
     title_30 = post.text[:30]
     context = {
         'title': title_30,
@@ -80,7 +81,8 @@ def post_create(request):
         'form': form,
         'is_edit': False
     }
-    return render(request,'posts/create_post.html', context)
+    return render(request, 'posts/create_post.html', context)
+
 
 @login_required
 def post_edit(request, post_id):
@@ -90,7 +92,7 @@ def post_edit(request, post_id):
     if request.user != current_post.author:
         return redirect('posts:post_detail', post_id)
     form = PostForm(request.POST or None,
-        instance=current_post)
+                    instance=current_post)
     if form.is_valid():
         form.save()
         return redirect('posts:post_detail', post_id)
@@ -99,4 +101,4 @@ def post_edit(request, post_id):
         'is_edit': True,
         'current_post': current_post
     }
-    return render(request, 'posts/create_post.html', context )
+    return render(request, 'posts/create_post.html', context)
