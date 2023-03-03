@@ -6,7 +6,10 @@ User = get_user_model()
 
 
 class Post(models.Model):
-    text = models.TextField()
+    text = models.TextField(
+        help_text="Заполнение данного поля является обязательным",
+        verbose_name="Текст поста",
+    )
     pub_date = models.DateTimeField(auto_now_add=True)
     author = models.ForeignKey(
         User,
@@ -18,7 +21,9 @@ class Post(models.Model):
         blank=True,
         null=True,
         on_delete=models.SET_NULL,
-        related_name='posts'
+        related_name='posts',
+        help_text="Выбрать группу (не обязательно)",
+        verbose_name="Группа"
     )
 
     def __str__(self):

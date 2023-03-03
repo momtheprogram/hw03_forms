@@ -10,7 +10,7 @@
             {{ post_title }}             
         </div>
         <div class="card-body">        
-          <form method="post" action="{% if is_edit %}{% url 'posts:post_edit' current_post.pk %}{% else %}{% url 'posts:post_create' %}{% endif %}">
+          <form method="post" action="{% if is_edit %}{% url 'posts:post_edit' post.pk %}{% else %}{% url 'posts:post_create' %}{% endif %}">
             {% csrf_token %}
 
             {% if form.errors %}
@@ -45,33 +45,7 @@
                       </small>
                     {% endif %}
                 </div>
-              {% endfor %}
-
-                       
-            {% comment %} <div class="form-group row my-3 p-3">
-              <label for="id_text">
-                Текст поста                  
-                <span class="required text-danger" >*</span>                  
-              </label>
-              <textarea name="text" cols="40" rows="10" class="form-control" required id="id_text">
-              </textarea>                
-              <small id="id_text-help" class="form-text text-muted">
-                Текст нового поста
-              </small>                  
-            </div>            
-            <div class="form-group row my-3 p-3">
-              <label for="id_group">
-                Группа                  
-              </label>
-              <select name="group" class="form-control" id="id_group">
-                <option value="" selected>---------</option>
-                <option value="1">{{ post.group }}</option>
-              </select>
-              <small id="id_group-help" class="form-text text-muted">
-                Группа, к которой будет относиться пост
-              </small>
-            </div>
-            {% endcomment %}
+        {% endfor %}
             <div class="d-flex justify-content-end">
               <button type="submit" class="btn btn-primary">
                 {% if is_edit %}
