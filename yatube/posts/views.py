@@ -93,8 +93,8 @@ def post_edit(request, post_id):
     return render(request, 'posts/create_post.html', context)
 
 
-def paginator(request, posts): 
-    paginator = Paginator(posts, 10) 
-    page_number = request.GET.get('page') 
-    page_obj = paginator.get_page(page_number) 
+def paginator(request, posts):
+    paginator = Paginator(posts, 10)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
     return page_obj
